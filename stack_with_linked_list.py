@@ -6,24 +6,25 @@ class Node:
 
 class Stack:
     def __init__(self, li=[]) -> None:
-        self.start = None
-        self.last = None
-        
+        self.top = None
+        self.bottom = None
+
         for val in li:
             self.push(val)
 
     def push(self, value):
-        new_node = Node(value, self.start)
-        self.start = new_node
+        self.bottom=self.top
+        new_node = Node(value, self.top)
+        self.top = new_node
         return True
 
     def pop(self):
-        top = self.start
-        self.start = self.start.next
+        top = self.top
+        self.top = self.top.next
         return top
 
     def print(self):
-        pointer = self.start
+        pointer = self.top
 
         while pointer:
             print(pointer.value)
