@@ -24,5 +24,5 @@ def calculate_sum(statement, target, calculation="", index=-1):
         )
 
 
-calculate_sum("1234567891011", 512)
+calculate_sum("123456789101", 512)
 print(len(li))
