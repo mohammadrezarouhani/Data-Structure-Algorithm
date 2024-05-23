@@ -19,24 +19,29 @@
 # Output: "0"
 # Explanation: Remove all the digits from the number and it is left with nothing which is 0.
 
-import pdb
-
 
 class Solution:
     def removeKdigits(self, num: str, k: int) -> str:
-        st = [0]
-        k += 1
+        if k>=len(num):
+            return '0'
+        st = []
 
         for n in num:
-            if int(n) <= st[-1] and k:
-                st[-1] = int(n)
+            while st and st[-1]>n and k:
+                st.pop()
                 k -= 1
-            else:
-                st.append(int(n))
+            st.append(n)
 
-        pdb.set_trace()
+        while k and st:
+            st.pop()
+            k -= 1
+
+        result=''.join(st).lstrip('0')
+        return result if result else '0'
+
+
 
 
 s = Solution()
 
-print(s.removeKdigits("1432219", 3))
+print(s.removeKdigits("1234567890", 9))
