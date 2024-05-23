@@ -23,6 +23,7 @@ def calculate_sum(statement, target, calculation="", index=-1):
             statement, target, calculation + "*" + statement[index + 1], index + 1
         )
 
+    return li
 
-calculate_sum("123456789101", 512)
-print(len(li))
+print(calculate_sum("123456789101", 512))
+
