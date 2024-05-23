@@ -22,11 +22,9 @@ class Solution:
         j = 0
         result = ""
 
-        ns = str(num)
         keys = (1000, 500, 100, 50, 10, 5, 1)
-        values = ["M", "D", "C", "L", "X", "V", "I"]
+        values = ("M", "D", "C", "L", "X", "V", "I")
         mapper = {key: value for key, value in zip(keys, values)}
-        nf = [int(ns[-i] + "0" * (i - 1)) for i in range(len(ns), 0, -1)]
 
         while num:
             length = len(str(num))
@@ -35,8 +33,9 @@ class Solution:
 
             if last == 4 or last == 9:
                 differ = 10 ** (length - 1)
-                value = num + differ
+                value = last * differ + differ
                 result += mapper[differ] + mapper[value]
+                num=num%differ if differ !=1 else 0
             else:
                 div = num // value
                 num = num % value
@@ -44,7 +43,8 @@ class Solution:
 
                 if num < value:
                     j += 1
-
+                    
+        return result
 
 s = Solution()
-print(s.intToRoman(3999))
+print(s.intToRoman(9999))
