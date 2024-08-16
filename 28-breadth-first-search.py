@@ -1,3 +1,4 @@
+import pdb
 from collections import deque
 
 
@@ -35,4 +36,31 @@ def breadth_first_search(start):
     return False
 
 
-print(breadth_first_search("you"))
+breadth_first_search("you")
+
+
+################## example 2
+from os import listdir
+from os.path import join, isfile
+
+
+def iterate_folder(start_dir):
+    search_queue = deque()
+    search_queue.append(start_dir)
+
+    while search_queue:
+        dir = search_queue.popleft()
+
+        for path in sorted(listdir(dir)):
+            full_path = join(dir, path)
+
+            if "venv" in path or "git" in path:
+                continue
+
+            if isfile(full_path):
+                print(f"file detected ==> {full_path}")
+            else:
+                search_queue.append(full_path)
+
+
+iterate_folder("ex")
