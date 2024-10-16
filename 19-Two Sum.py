@@ -9,5 +9,5 @@ def twoSum( nums: List[int], target: int) -> List[int]:
         if complement in hashmap and hashmap[complement]!=i:
             return [i,hashmap[complement]]
 
-
+ q
 pprint(twoSum([2,7,11,15],9))
