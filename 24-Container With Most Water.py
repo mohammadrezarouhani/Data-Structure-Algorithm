@@ -12,21 +12,21 @@ from typing import List
 
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        left=0
-        right=len(height)-1
-        maxArea=0
+        left = 0
+        right = len(height) - 1
+        maxArea = 0
 
-        while left <right:
-            currentArea=min(height[left],height[right])*(right-left)
-            maxArea=max(maxArea,currentArea)
+        while left < right:
+            currentArea = min(height[left], height[right]) * (right - left)
+            maxArea = max(maxArea, currentArea)
 
             if height[left] < height[right]:
-                left+=1
+                left += 1
             else:
-                right-=1
-        
+                right -= 1
+
         return maxArea
 
 
-s=Solution()
-print(s.maxArea([2,3,4,5,18,17,6]))
+s = Solution()
+print(s.maxArea([2, 3, 4, 5, 18, 17, 6]))
