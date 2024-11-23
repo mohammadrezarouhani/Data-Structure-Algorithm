@@ -19,19 +19,55 @@
 
 
 # solution greedy algorithm
-def sell_and_buy(report: list):
-    report_sorted = sorted(report)
-    report_dict = {price: index for index, price in enumerate(report)}
+import pprint
+
+
+def sell_and_buy_method1(report: list):
+    report_mapper = [(index, price) for index, price in enumerate(report)]
+    report_sorted_mapper = sorted(report_mapper, key=lambda key: key[1])
     result = None
     max_profit = 0
 
-    for i in report_sorted:
-        for j in report_sorted[::-1]:
-            if report_dict[i] < report_dict[j] and j - i > max_profit:
-                max_profit = j - i
-                result = report_dict[i] + 1, report_dict[j] + 1
+    for i, r1 in report_sorted_mapper:
+        for j, r2 in report_sorted_mapper[::-1]:
+            if r2 - r1 > max_profit and j > i:
+                max_profit = r2 - r1
+                result = (i, j)
 
     return result
 
 
-print(sell_and_buy([10, 9, 8, 5, 7, 10, 6, 8]))
+def sell_buy_method2(report: list):
+    temp = report.copy()
+    max_profit = 0
+    result = None
+
+    for i, price in enumerate(report):
+        temp.pop(i)
+        max_value = max(temp)
+        new_calculate = max_value - price
+
+        if new_calculate > max_profit:
+            max_profit = new_calculate
+            result = i, report.index(max_value)
+
+    return result
+
+
+def sell_and_buy_dynamic_programming(report: list):
+    grid = [[r2 for r2 in report] for r1 in report]
+    max_profit = 0
+    result = None
+
+    for i, r1 in enumerate(report):
+        for j, r2 in enumerate(report):
+            grid[i][j] = r2 - r1
+            if grid[i][j] > max_profit and j > i:
+                max_profit = grid[i][j]
+                result = (i + 1, j + 1)
+
+    print(pprint.pformat(grid, width=40))
+    return result
+
+
+print(sell_and_buy_dynamic_programming([10, 9, 8, 5, 7, 10, 6, 8]))
