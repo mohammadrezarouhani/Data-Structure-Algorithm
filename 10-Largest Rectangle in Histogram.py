@@ -1,4 +1,3 @@
-
 class Solution(object):
     def largestRectangleArea(self, heights):
         """
@@ -22,6 +21,6 @@ class Solution(object):
 
 
 s = Solution()
-answer = s.largestRectangleArea([2,4])
+answer = s.largestRectangleArea([2, 4])
 
 print(answer == 4)
